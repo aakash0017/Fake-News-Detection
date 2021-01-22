@@ -7,17 +7,13 @@ from gensim.models import KeyedVectors
 from gensim.models import Word2Vec
 import numpy as np
 import csv # to be removed later 
-import wget
+import gensim.downloader as api
 
 # Download Stop_words from nltk library
 def get_stopwords():
     download('stopwords')
     stop_words = stopwords.words('english')
     return stop_words
-
-# Download WordEmbedding
-def get_wordEmedding(url):
-    wget.download(url)
 
 # Create a method to import pre-downloaded Embedding matrix [GoogleNews-vectors-negative300.bin.gz]
 def chk_for_WrdEmbeddings(filepath):
@@ -52,15 +48,17 @@ class WordS_Mover_Distance:
         # else     
         else:
             # method to create model
-            self.create_model('C:/Users/asus/WMD/GoogleNews-vectors-negative300.bin.gz')
+            self.createmodel_usingapi()
+            #self.create_model('C:/Users/asus/WMD/GoogleNews-vectors-negative300.bin.gz')
             # method to export model
             #self.export_model()
 
-    # Create model using EM url
-    def create_model_url(self, url):
-        print(url)
-        get_wordEmedding(url)
-        self.model = KeyedVectors.load_word2vec_format("GoogleNews-vectors-negative300.bin.gz", binary=True)
+    # Create model without downloading Embedding-matrix
+    # using Genim.downloader api ; arguments - name of model/dataset
+    def createmodel_usingapi(self):
+        print('downloading awa creating model ')
+        self.model = api.load('word2vec-google-news-300')
+        
         
     # Create model method
     def create_model(self, filepath):
