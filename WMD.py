@@ -43,12 +43,13 @@ class WordS_Mover_Distance:
     def __init__(self):
         self.stop_words = get_stopwords()
         # if model already present import;
-        if os.path.exists('C:/Users/asus/WMD/model.bin'):
+        if os.path.exists('/mymodel'):
             self.load_model()
         # else     
         else:
             # method to create model
             self.createmodel_usingapi()
+            self.export_model()
             #self.create_model('C:/Users/asus/WMD/GoogleNews-vectors-negative300.bin.gz')
             # method to export model
             #self.export_model()
@@ -67,13 +68,14 @@ class WordS_Mover_Distance:
         
     # Export model method
     def export_model(self):
+        print("Exporting model...")
         model = self.model
-        model.save('C:/Users/asus/WMD/model.bin')
+        model.save('/mymodel')
 
     # Load model method
     def load_model(self):
         print("Loading model...")
-        self.model = Word2Vec.load("C:/Users/asus/WMD/model.bin")
+        self.model = Word2Vec.load("/mymodel")
 
     # Text Similarity
     def TextSimilarity(self, s1, s2):
