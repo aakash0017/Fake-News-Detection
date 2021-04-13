@@ -7,7 +7,6 @@ from gensim.models import KeyedVectors
 from gensim.models import Word2Vec
 import numpy as np
 import csv # to be removed later 
-import gensim.downloader as api
 
 # Download Stop_words from nltk library
 def get_stopwords():
@@ -43,24 +42,16 @@ class WordS_Mover_Distance:
     def __init__(self):
         self.stop_words = get_stopwords()
         # if model already present import;
-        if os.path.exists('/mymodel'):
+        if os.path.exists('mymodel'):
             self.load_model()
         # else     
         else:
             # method to create model
-            self.createmodel_usingapi()
-            self.export_model()
-            #self.create_model('C:/Users/asus/WMD/GoogleNews-vectors-negative300.bin.gz')
+            self.create_model('GoogleNews-vectors-negative300.bin.gz')
+            # self.export_model()
             # method to export model
             #self.export_model()
 
-    # Create model without downloading Embedding-matrix
-    # using Genim.downloader api ; arguments - name of model/dataset
-    def createmodel_usingapi(self):
-        print('downloading awa creating model ')
-        self.model = api.load('word2vec-google-news-300')
-        
-        
     # Create model method
     def create_model(self, filepath):
         print('creating model')
@@ -68,14 +59,13 @@ class WordS_Mover_Distance:
         
     # Export model method
     def export_model(self):
-        print("Exporting model...")
         model = self.model
-        model.save('/mymodel')
+        model.save('mymodel')
 
     # Load model method
     def load_model(self):
         print("Loading model...")
-        self.model = Word2Vec.load("/mymodel")
+        self.model = Word2Vec.load("mymodel")
 
     # Text Similarity
     def TextSimilarity(self, s1, s2):
@@ -88,7 +78,7 @@ class WordS_Mover_Distance:
         return dist
 
 
-#wmdobj = WordS_Mover_Distance()
+wmdobj = WordS_Mover_Distance()
 
-#dist = wmdobj.TextSimilarity("On first day as president, Biden to issue 17 executive actions on COVID, climate change, immigration and more", "Biden to sign 17 executive actions reversing Trump policies on climate, Covid, immigration")
-#print(dist)
+dist = wmdobj.TextSimilarity("SpaceX to set a new record of rapid reuse with latest Starlink launch", "With latest Starlink launch, SpaceX to set record for rapid reuse")
+print(dist)
