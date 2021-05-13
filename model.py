@@ -1,7 +1,6 @@
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-
 model_name = 'bert-base-nli-mean-tokens'
 model = SentenceTransformer(model_name)
 
@@ -16,5 +15,3 @@ print(cosine_similarity(
     [sentence_embeddings[0]],
     sentence_embeddings[1:]
 ))
-# print(sentence_embeddings)
-    
