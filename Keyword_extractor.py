@@ -2,7 +2,7 @@ import numpy as np
 import yake 
 
 kw_extractor = yake.KeywordExtractor()
-text = """spaCy is an open-source software library for advanced natural language processing, written in the programming languages Python and Cython. The library is published under the MIT license and its main developers are Matthew Honnibal and Ines Montani, the founders of the software company Explosion."""
+text = """Former President Barack Obama to make his first appearance on The Late Late Show with James Corden"""
 language = "en"
 max_ngram_size = 3
 deduplication_threshold = 0.9
@@ -15,4 +15,4 @@ for kw in keywords:
 tup = [i[1] for i in keywords]
 tup_array = np.asarray(tup)
 print(np.argmax(tup_array))
-print(keywords[19])
+print(keywords[16])

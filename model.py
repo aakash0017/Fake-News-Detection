@@ -27,6 +27,7 @@ class Sentence_Similarity:
             [self.Context_Embedding],
             self.References_Embeddings
         )
+        print(result)
         return result 
     
     def getMostSimilar(self):
